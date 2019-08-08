@@ -1,0 +1,96 @@
+<html lang="en">
+<head>
+  <title>Document</title>
+  <style>
+  .editbox{
+      visibility: hidden;   
+  }
+  .show {
+      visibility: visible
+  }
+  .heading{
+      border: 3px solid;
+      width:200px
+  }
+  </style>
+</head>
+<body>
+    <h1 class="heading">TO DO APP:</h1>
+    <p>
+        <input id= "12345" >
+        <button onclick="add()" >ADD</button>
+    </p>
+  <table>
+      <tbody id = 'tablebody'>
+
+      </tbody>
+  </table>
+</body>
+
+<script>
+   
+    var names = ["hello"];
+    
+
+    var tbodyy = document.getElementById('tablebody')
+    function func1()
+    {
+       for(var i = 0 ; i < names.length ; i++)
+       {
+            tbodyy.innerHTML += `<tr id =${i}>
+            <td>${i}</td>
+            <td id = ${i+10}>${names[i]}</td>
+           
+            <td><button onclick='check(${[i]})'>Delete</button></td>
+            <td><button onclick='edit(${[i]})'>Edit</button></td>
+            <td id="field${i}"class='editbox'><input id="input${i}" type= 'text'></td>
+            <td id="btn${i}" class='editbox'><button onclick = 'editt(${[i]})'>Submit</button></td>
+            </tr>`
+       }
+    }
+    func1();
+
+    function check(flag)
+    {
+        document.getElementById(flag).remove();
+        names.splice(flag, 1);
+        tbodyy.innerHTML = null;
+        func1();
+    }
+    
+    function edit(flag)
+    {
+        
+        tbodyy.innerHTML = null;
+        func1();
+        document.getElementById('field'+flag).className='show';
+        document.getElementById('btn'+flag).className='show';
+        document.getElementById('input'+flag).value = document.getElementById(flag+10).innerHTML;
+   
+       
+    }
+    function editt(flag)
+    {
+        if(document.getElementById('input'+flag).value == "")
+        {
+            alert("Do not leave the field empty.")
+        }
+        else{
+        names[flag] = document.getElementById('input'+flag).value;
+       tbodyy.innerHTML = null;
+       func1()}
+    }
+    function add(){
+        if(document.getElementById("12345").value == "")
+        {
+            alert("Do not leave the field empty.")
+        }
+        else{
+       
+    names.push(document.getElementById("12345").value)
+    document.getElementById("12345").value = null
+    tbodyy.innerHTML = null;
+    func1()}
+    }
+</script>
+</html>
